@@ -138,7 +138,7 @@ theme: "light",
             if(!reverse){
 try{
         const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate POLYGON testnet endpoint
-      const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
+      const privateKey ="";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
 const inputETh = ethers.utils.parseUnits(input , 8);
@@ -161,7 +161,7 @@ notify2();
 
 try{
         const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate POLYGON testnet endpoint
-      const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
+      const privateKey ="";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
 const inputETh = ethers.utils.parseUnits(input , 8);
