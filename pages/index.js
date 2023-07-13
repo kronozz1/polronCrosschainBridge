@@ -348,6 +348,10 @@ const switchToGoerli = async () => {
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
       <a href="/poly-eth" class="mr-5 text-white">Swap POLRON(Goerli) - POLRON(polygon)</a>
     </nav>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+      <a href="/poly-bnb" class="mr-5 text-white">Swap POLRON(polygon) - POLRON(BSC)</a>
+    </nav>
+
     <button onClick={connectWallet} class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><img className="h-5 w-5 mr-2" src="favicon.png" />{walletConnected ? "Connected" : "Connect Wallet"}
     </button>
   </div>
@@ -503,6 +507,9 @@ const switchToGoerli = async () => {
   
   </div>
 </section>
+    <footer className={styles.footer}>
+        Made with &#10084; by Aman.eth 
+      </footer>
     </>
   )
 }

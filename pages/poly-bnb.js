@@ -19,7 +19,7 @@ export default function Home() {
   const [subt , setsubt ] = React.useState();
     const [bnbBalances , setbnbBalance] = React.useState();
   const [ bnbNetwork , setbnbNetwork] = React.useState(false);
-  const [ Goerlinetwork , setgoerli] = React.useState(false);
+  const [ polygonnetwork , setgoerli] = React.useState(false);
     const [userAddress, setuserAddress]=React.useState();
   const [token1balance , settoken1balance]=React.useState("");
     const [token2balance , settoken2balance]=React.useState("");
@@ -31,18 +31,18 @@ const [reverse , setreverse] = React.useState(false);
     const provider = await ModelRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
     const {chainId} = await web3Provider.getNetwork();
-        if(reverse == false && chainId == 80001){
+        if(reverse == false && chainId == 97){
           setbnbNetwork(true);
     }else if(reverse == true && chainId == 5){
       setgoerli(true);
 
     }else{
       if(reverse != true){
-      window.alert("Change Your Network to Polygon Mumbai Network");
-      throw new Error("Change Your Network to Polygon Mumbai Network");
+      window.alert("Change Your Network to BNB Network");
+      throw new Error("Change Your Network to BNB Network");
       }else if (reverse != false){
-      window.alert("Change Your Network to Goerli Network");
-      throw new Error("Change Your Network to Goerli Network");
+      window.alert("Change Your Network to polygon Network");
+      throw new Error("Change Your Network to polygon Network");
       }
 
     }
@@ -83,7 +83,7 @@ theme: "light",
 
   function redirect (){
       setTimeout(function() {
-    window.location.replace("/poly-eth");
+    window.location.replace("/");
 
 }, 2500);
 };
@@ -137,7 +137,7 @@ theme: "light",
        
             if(!reverse){
 try{
-        const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate POLYGON testnet endpoint
+        const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate BSC testnet endpoint
       const privateKey ="";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
@@ -160,7 +160,7 @@ notify2();
 }else{
 
 try{
-        const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate POLYGON testnet endpoint
+        const provider = new ethers.providers.JsonRpcProvider('https://wiser-old-wildflower.bsc-testnet.discover.quiknode.pro/a17c196f848795c42d0000e1e2e4146ea3ca7001/'); // use the appropriate BSC testnet endpoint
       const privateKey ="";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
@@ -191,11 +191,11 @@ notify2();
 const reverseswaps = async ()=>{
   if(reverse == true){
     setreverse(false);
-        switchToGoerli1();
+        switchTopolygon1();
 
   }else{
     setreverse(true);
-        switchToGoerli();
+        switchTopolygon();
   }
   console.log(reverse);
 
@@ -216,11 +216,11 @@ const reverseswaps = async ()=>{
     try{
             const signer = await getSignerOrProvider(true);
       const address = await signer.getAddress();
-    const provider1 = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate POLYGON testnet endpoint
+    const provider1 = new ethers.providers.JsonRpcProvider('https://wiser-old-wildflower.bsc-testnet.discover.quiknode.pro/a17c196f848795c42d0000e1e2e4146ea3ca7001/'); // use the appropriate BSC testnet endpoint
       const contracts = new Contract(Token1Address, Token1abi, provider1);
       const balance1 = await contracts.balanceOf(address);
       settoken2balance(ethers.utils.formatUnits(balance1 , 8));
-    const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate POLYGON testnet endpoint
+    const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate BSC testnet endpoint
       const contract = new Contract(Token1Address, Token1abi, provider);
       const balance = await contract.balanceOf(address);
       settoken1balance(ethers.utils.formatUnits(balance , 8));
@@ -233,8 +233,8 @@ console.log(balance);
     try{
       const signer = await getSignerOrProvider(true);
       const address = await signer.getAddress();
-      if(Goerlinetwork){
-    const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate POLYGON testnet endpoint
+      if(polygonnetwork){
+    const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate BSC testnet endpoint
 try{
   const balance = await provider.getBalance(address);
 const userbnbBalance = ethers.utils.formatEther(balance);
@@ -244,7 +244,7 @@ const userbnbBalance = ethers.utils.formatEther(balance);
       console.error(err);
 }
 }else if(bnbNetwork){
-    const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/qDunlKrTnLzKZVZ97u16nTJRE0xglKsL'); // use the appropriate POLYGON testnet endpoint
+    const provider = new ethers.providers.JsonRpcProvider('https://wiser-old-wildflower.bsc-testnet.discover.quiknode.pro/a17c196f848795c42d0000e1e2e4146ea3ca7001/'); // use the appropriate BSC testnet endpoint
   try{
   const balance = await provider.getBalance(address);
 const userbnbBalance = ethers.utils.formatEther(balance);
@@ -271,8 +271,26 @@ await BNBbalance();
     }
   }
 
+const switchTopolygon1 = async () => {
+  const { ethereum } = window;
+  if (ethereum && ethereum.isMetaMask) {
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x61', // Binance Smart Chain Testnet chain ID
+          },
+        ],
+      });
+      console.log('Switched to Binance Smart Chain Testnet successfully!');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 
-const switchToGoerli1 = async () => {
+const switchTopolygon = async () => {
   const { ethereum } = window;
   if (ethereum && ethereum.isMetaMask) {
     try {
@@ -300,25 +318,6 @@ const switchToGoerli1 = async () => {
 };
 
 
-
-const switchToGoerli = async () => {
-  const { ethereum } = window;
-  if (ethereum && ethereum.isMetaMask) {
-    try {
-      await ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [
-          {
-            chainId: '0x5', // Goerli chain ID
-          },
-        ],
-      });
-      console.log('Switched to Goerli network successfully!');
-    } catch (error) {
-      console.error(error);
-    }
-  }
-};
 
 
   const connectWallet = async () =>{
@@ -356,10 +355,11 @@ const switchToGoerli = async () => {
       <span class=" text-xl">Crosschain Bridge</span>
     </a>
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-      <a href="/" class="mr-5 text-white">Swap POLRON(Goerli) - POLRON(BSC)</a>
+          <a href="/" class="mr-5 text-white">Swap POLRON(polygon) - POLRON(BSC)</a>
+
     </nav>
-    <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-      <a href="/poly-bnb" class="mr-5 text-white">Swap POLRON(Polygon) - POLRON(BSC)</a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+          <a href="/poly-eth" class="mr-5 text-white">Swap POLRON(polygon) - POLRON(BSC)</a>
     </nav>
 
     <button onClick={connectWallet} class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><img className="h-5 w-5 mr-2" src="favicon.png" />{walletConnected ? "Connected" : "Connect Wallet"}
@@ -371,7 +371,7 @@ const switchToGoerli = async () => {
   <div class="container mx-auto">
     <div class="flex flex-col w-full mb-8">
       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white "> Crosschain Bridge </h1>
-      <p class=" leading-relaxed text-white ">Here you can swap POLRON(POLYGON) to POLRON(Goerli)</p>
+      <p class=" leading-relaxed text-white ">Here you can swap POLRON(BSC) to POLRON(polygon)</p>
     </div>
   <div class="row">
  <div class="box-50">
@@ -381,10 +381,10 @@ const switchToGoerli = async () => {
 	 <div class="value_top">
     {
       !reverse?
-          <div class="">Token Balance: <span>{token2balance}</span> POLRON(POLYGON)</div>
+          <div class="">Token Balance: <span>{token2balance}</span> POLRON(BSC)</div>
 
       :
-                <div class="">Token Balance: <span>{token1balance}</span> POLRON(Goerli)</div>
+                <div class="">Token Balance: <span>{token1balance}</span> POLRON(polygon)</div>
 
 
     }
@@ -393,7 +393,7 @@ const switchToGoerli = async () => {
         { !reverse ?
           <div>
                   <div class="p-2 w_1_box mb-3">
-            <label for="name" class="leading-7 text-gray-600"><b>POLRON(POLYGON)</b></label>
+            <label for="name" class="leading-7 text-gray-600"><b>POLRON(BSC)</b></label>
 			<div class="input_box">
         { !Enable ? 
               <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
@@ -415,9 +415,9 @@ const switchToGoerli = async () => {
                     <div>
 
 
-		<p class="mb-2 text-gray-600">swap rate: 1:1 (1 POLRON(POLYGON) = 1 POLRON(Goerli))</p>
+		<p class="mb-2 text-gray-600">swap rate: 1:1 (1 POLRON(BSC) = 1 POLRON(polygon))</p>
                    <div class="p-2 w_1_box mb-2">
-            <label for="email" class="leading-7 text-gray-600"><b>POLRON(Goerli)</b></label>
+            <label for="email" class="leading-7 text-gray-600"><b>POLRON(polygon)</b></label>
 			<div class="input_box">
             <input type="number" id="name" name="name" disabled = {true} class=" w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  transition-colors  duration-200 ease-in-out" placeholder={input} />
              <div class="input_right">
@@ -439,7 +439,7 @@ const switchToGoerli = async () => {
 
 
                    <div class="p-2 w_1_box mb-2">
-            <label for="email" class="leading-7 text-gray-600"><b>POLRON(Goerli)</b></label>
+            <label for="email" class="leading-7 text-gray-600"><b>POLRON(polygon)</b></label>
 			<div class="input_box">
         { !Enable ? 
               <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
@@ -462,11 +462,11 @@ const switchToGoerli = async () => {
 </div>
 
                                   			 <img className="h-7 mb-[5px] ml-[15.5rem] mt-[9px] cursor-pointer" src="up-down.png" onClick={()=>reverseswaps()}/>
-                    		<p class="mb-2 text-gray-600">swap rate: 1:1 (1 POLRON(Goerli) = 1 POLRON(POLYGON))</p>
+                    		<p class="mb-2 text-gray-600">swap rate: 1:1 (1 POLRON(polygon) = 1 POLRON(BSC))</p>
 
 
                   <div class="p-2 w_1_box mb-3">
-            <label for="name" class="leading-7 text-gray-600"><b>POLRON(POLYGON)</b></label>
+            <label for="name" class="leading-7 text-gray-600"><b>POLRON(BSC)</b></label>
 			<div class="input_box">
                       <input type="number" id="name" name="name" disabled = {true} class=" w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  transition-colors  duration-200 ease-in-out" placeholder={input} />
 
