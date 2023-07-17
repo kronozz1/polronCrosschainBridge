@@ -190,6 +190,13 @@ notify2();
                           if (err.message.includes('execution reverted: ERC20: burn amount exceeds balance')) {
 notify2();
                           }
+             if (
+    err.message.includes('fractional component exceeds decimals') &&
+    err.message.includes('NUMERIC_FAULT')
+  ) {
+    alert('You cannot enter more than 8 digits after the decimal');
+  }
+
 
     }
   }
@@ -407,7 +414,8 @@ const switchToGoerli = async () => {
             <label for="name" class="leading-7 text-gray-600"><b>POLRON(POLYGON)</b></label>
 			<div class="input_box">
         { !Enable ? 
-              <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+                                  <input type="number" onChange={handleChange} id="name" min="0" maxlength="7" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+
 
 
 :
@@ -453,7 +461,7 @@ const switchToGoerli = async () => {
             <label for="email" class="leading-7 text-gray-600"><b>POLRON(Goerli)</b></label>
 			<div class="input_box">
         { !Enable ? 
-              <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+                        <input type="number" onChange={handleChange} id="name" min="0" maxlength="7" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
 
 
 :
