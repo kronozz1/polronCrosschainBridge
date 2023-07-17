@@ -70,7 +70,7 @@ const [reverse , setreverse] = React.useState(false);
       console.error(err);
     }
   }
-      const notify1 = () => toast.success('Bridge Successfull', {
+      const notify1 = () => toast.success('Bridge Successful', {
 position: "top-center",
 autoClose: 5000,
 hideProgressBar: false,
@@ -108,7 +108,7 @@ progress: undefined,
 theme: "light",
 });
 
-  const notify = () => toast.success('Please wait! , You will recieve your Token shortly ', {
+  const notify = () => toast.success('Please wait ! , You will receive your Token shortly ', {
 position: "top-center",
 autoClose: 5000,
 hideProgressBar: false,
@@ -138,7 +138,7 @@ theme: "light",
             if(!reverse){
 try{
         const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate BSC testnet endpoint
-      const privateKey ="";
+      const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
 const inputETh = ethers.utils.parseUnits(input , 8);
@@ -161,7 +161,7 @@ notify2();
 
 try{
         const provider = new ethers.providers.JsonRpcProvider('https://wiser-old-wildflower.bsc-testnet.discover.quiknode.pro/a17c196f848795c42d0000e1e2e4146ea3ca7001/'); // use the appropriate BSC testnet endpoint
-      const privateKey ="";
+      const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
 const inputETh = ethers.utils.parseUnits(input , 8);
@@ -367,7 +367,7 @@ const switchToGoerli = async () => {
  <div class="box-50">
   <div class="box_white">
     <form >
-                                            <div class="">Wallet Address :<span>{userAddress}</span></div>
+                                            <div >  <span class="text-gray-600"> Wallet Address :{userAddress}</span></div>
 	 <div class="value_top">
     {
       !reverse?
@@ -513,6 +513,7 @@ const switchToGoerli = async () => {
     </>
   )
 }
+
 
 
 
