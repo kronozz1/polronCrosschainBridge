@@ -192,10 +192,16 @@ const reverseswaps = async ()=>{
   if(reverse == true){
     setreverse(false);
         switchToGoerli1();
+    setinput("");
+        setinput2("");
+
 
   }else{
     setreverse(true);
         switchToGoerli();
+        setinput("");
+        setinput2("");
+
   }
   console.log(reverse);
 
