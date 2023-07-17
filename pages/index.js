@@ -54,7 +54,11 @@ const [reverse , setreverse] = React.useState(false);
     return web3Provider;
   }
   const handleChange= async (e) =>{
- setinput(e.target.value);
+    if (e.target.value < 0) {
+    alert("Negative amount is not allowed!");
+  }else{
+     setinput(e.target.value);
+  }
   }
   console.log(input);
 
@@ -392,7 +396,10 @@ const switchToGoerli = async () => {
             <label for="name" class="leading-7 text-gray-600"><b>POLRON(BSC)</b></label>
 			<div class="input_box">
         { !Enable ? 
-              <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+          <input type="number" onChange={handleChange} id="name" name="name" min="0" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+
+
+
 
 
 :
@@ -438,7 +445,7 @@ const switchToGoerli = async () => {
             <label for="email" class="leading-7 text-gray-600"><b>POLRON(Goerli)</b></label>
 			<div class="input_box">
         { !Enable ? 
-              <input type="number" onChange={handleChange} id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
+              <input type="number" onChange={handleChange} id="name" min="0" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 transition-colors duration-200 ease-in-out" required/>
 
 
 :

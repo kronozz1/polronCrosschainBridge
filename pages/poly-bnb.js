@@ -54,7 +54,11 @@ const [reverse , setreverse] = React.useState(false);
     return web3Provider;
   }
   const handleChange= async (e) =>{
- setinput(e.target.value);
+        if (e.target.value < 0) {
+    alert("Negative amount is not allowed!");
+  }else{
+     setinput(e.target.value);
+  }
   }
   console.log(input);
 
