@@ -196,10 +196,16 @@ const reverseswaps = async ()=>{
   if(reverse == true){
     setreverse(false);
         switchTopolygon1();
+            setinput("");
+        setinput2("");
+
 
   }else{
     setreverse(true);
         switchTopolygon();
+            setinput("");
+        setinput2("");
+
   }
   console.log(reverse);
 
