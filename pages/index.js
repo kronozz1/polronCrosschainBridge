@@ -55,7 +55,7 @@ const [reverse , setreverse] = React.useState(false);
   }
   const handleChange= async (e) =>{
     if (e.target.value < 0) {
-    alert("Negative amount is not allowed!");
+      notifynega();
   }else{
      setinput(e.target.value);
   }
@@ -91,6 +91,39 @@ theme: "light",
 
 }, 2500);
 };
+  const notifyinvalid = () => toast.error(' Please Enter Valid amount ! ', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+});
+
+  const notifydecimal = () => toast.error(' You cannot enter more than 8 digits after the decimal ', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+});
+  const notifynega = () => toast.error(' Negative amount is not allowed!', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+});
+
+
   const notify2 = () => toast.error('You dont have enough amount to Bridge', {
 position: "top-center",
 autoClose: 5000,
@@ -196,8 +229,11 @@ notify2();
     err.message.includes('fractional component exceeds decimals') &&
     err.message.includes('NUMERIC_FAULT')
   ) {
-    alert('You cannot enter more than 8 digits after the decimal');
+         notifydecimal();
   }
+                                if (err.message.includes('invalid decimal value')) {
+                                  notifyinvalid();
+                                }
 
     }
   }
@@ -530,7 +566,9 @@ const switchToGoerli = async () => {
   </div>
 </section>
     <footer className={styles.footer}>
-        Made with &#10084; by Aman.eth 
+          <p class=" leading-relaxed text-white ">        Made with &#10084; by Aman.eth 
+</p>
+
       </footer>
     </>
   )
