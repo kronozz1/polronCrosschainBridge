@@ -33,8 +33,10 @@ const [reverse , setreverse] = React.useState(false);
     const {chainId} = await web3Provider.getNetwork();
         if(reverse == false && chainId == 97){
           setbnbNetwork(true);
+          setwalletConnected(true);
     }else if(reverse == true && chainId == 5){
       setgoerli(true);
+                setwalletConnected(true);
 
     }else{
       if(reverse != true){
@@ -163,7 +165,7 @@ theme: "light",
     try{
       networkalert();
        getBlanceTokenAmanDevToken();
-
+await balanceAndAddress();
       console.log(userAddress);
       const provider1 = await getSignerOrProvider(true);
       const contract = new Contract(Token1Address, Token1abi, provider1);
@@ -176,12 +178,16 @@ theme: "light",
        
             if(!reverse){
 try{
+              const signer1 = await getSignerOrProvider(true);
+      const address = await signer1.getAddress();
+    console.log("address ",address);
         const provider = new ethers.providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/Vl1iJFNY1_v7HfyKUXhkmsGEuL8t_IHc'); // use the appropriate BSC testnet endpoint
       const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
         const signer = new ethers.Wallet(privateKey, provider);
     const myContract = new Contract(Token1Address , Token1abi , signer);
+  console.log("hello user ",userAddress);
 const inputETh = ethers.utils.parseUnits(input , 8);
-    const _tokenMinted = await myContract.mint(userAddress, inputETh ,{ gasLimit: 1000000 });
+    const _tokenMinted = await myContract.mint(address, inputETh ,{ gasLimit: 1000000 });
             await _tokenMinted.wait();
       notify1();
       redirect();
@@ -201,12 +207,17 @@ notify2();
 }else{
 
 try{
+                const signer1 = await getSignerOrProvider(true);
+      const address = await signer1.getAddress();
+  console.log("address ",address);
+  setuserAddress(address);
         const provider = new ethers.providers.JsonRpcProvider('https://wiser-old-wildflower.bsc-testnet.discover.quiknode.pro/a17c196f848795c42d0000e1e2e4146ea3ca7001/'); // use the appropriate BSC testnet endpoint
       const privateKey ="858bf3089d09c24eb8a19f42fd271b39dfab65666f25e8ce51ad54f993d776a4";
         const signer = new ethers.Wallet(privateKey, provider);
+    console.log("hello user ",userAddress);
     const myContract = new Contract(Token1Address , Token1abi , signer);
 const inputETh = ethers.utils.parseUnits(input , 8);
-    const _tokenMinted = await myContract.mint(userAddress, inputETh ,{ gasLimit: 1000000 });
+    const _tokenMinted = await myContract.mint(address, inputETh ,{ gasLimit: 1000000 });
             await _tokenMinted.wait();
       notify1();
       redirect();
@@ -229,7 +240,7 @@ notify2();
        console.log('Caught error:', err);
        if (
     err.message.includes('fractional component exceeds decimals') &&
-    err.message.includes('NUMERIC_FAULT')
+    erR.message.includes('NUMERIC_FAULT')
   ) {
          notifydecimal();
   }
@@ -239,24 +250,6 @@ notify2();
 
     }
   }
-const reverseswaps = async ()=>{
-  if(reverse == true){
-    setreverse(false);
-        switchToGoerli1();
-    setinput("");
-        setinput2("");
-
-
-  }else{
-    setreverse(true);
-        switchToGoerli();
-        setinput("");
-        setinput2("");
-
-  }
-  console.log(reverse);
-
-}
 
 
     const networkalert = () =>{
@@ -376,6 +369,29 @@ const switchToGoerli = async () => {
       console.error(err);
     }
   }
+const reverseswaps = async ()=>{
+    if(reverse == true){
+    setreverse(false);
+        switchToGoerli1();
+await              balanceAndAddress();
+    setinput("");
+        setinput2("");
+
+
+  }else{
+
+    setreverse(true);
+        switchToGoerli();
+                   await balanceAndAddress();
+
+        setinput("");
+        setinput2("");
+
+  }
+  console.log(reverse);
+
+}
+
   React.useEffect(()=>{
     if(!walletConnected){
       ModelRef.current = new Web3Modal({
