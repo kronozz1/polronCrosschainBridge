@@ -52,7 +52,7 @@ a {
   }
 }
 
-.container { max-width: 1380px;    padding-left:100px; padding-right:100px;    position: relative;    z-index: 1;}
+.container { max-width: 1380px;    padding-left:100px; padding-right:100px;    position: relative;    ;}
 .middle_box{    padding: 90px 0;}
 .btn_right{    display: inline-block;
     width: 80%;
@@ -86,6 +86,15 @@ ul.socail-link li a img {
     display: flex;
     justify-content: space-between;
 }
+.headertop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #212121;
+    z-index: 9;
+}
+
 .value_top {
     display: flex;
     justify-content: space-between;
