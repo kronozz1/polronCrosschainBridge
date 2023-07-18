@@ -56,6 +56,7 @@ const [reverse , setreverse] = React.useState(false);
   const handleChange= async (e) =>{
         if (e.target.value < 0) {
           notifynega();
+          setinput2("");
   }else{
      setinput(e.target.value);
   }
