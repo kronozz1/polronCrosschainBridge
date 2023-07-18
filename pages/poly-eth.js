@@ -403,7 +403,7 @@ const switchToGoerli = async () => {
 
     <title>Crosschain Bridge</title>
     </Head>
-    <header class="text-gray-600 body-font">
+    <header class="text-gray-600 body-font headertop">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <ToastContainer />
     <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
@@ -573,7 +573,7 @@ const switchToGoerli = async () => {
   </div>
 </section>
         <footer className={styles.footer}>
-                  <p class=" leading-relaxed text-white ">        Made with &#10084; by Aman.eth 
+                  <p class=" leading-relaxed text-gray-600 ">        Made with &#10084; by Aman.eth 
 </p>
 
       </footer>
