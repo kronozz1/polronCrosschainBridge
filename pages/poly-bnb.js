@@ -18,6 +18,7 @@ export default function Home() {
   const [input2 , setinput2] = React.useState();
   const [subt , setsubt ] = React.useState();
     const [bnbBalances , setbnbBalance] = React.useState();
+  const [btnpause , setbtnpause] = React.useState(false);
   const [ bnbNetwork , setbnbNetwork] = React.useState(false);
   const [ polygonnetwork , setgoerli] = React.useState(false);
     const [userAddress, setuserAddress]=React.useState();
@@ -59,7 +60,7 @@ const [reverse , setreverse] = React.useState(false);
   const handleChange= async (e) =>{
         if (e.target.value < 0) {
           notifynega();
-          setinput2("");
+          setinput("");
   }else{
      setinput(e.target.value);
   }
@@ -162,6 +163,7 @@ theme: "light",
   const approval= async() =>{
 
     try{
+                        setbtnpause(true);
       networkalert();
             await BlanceToken1();
       await getBlanceTokenAmanDevToken();
@@ -245,6 +247,11 @@ notify2();
                                       if (err.message.includes('invalid decimal value')) {
                                   notifyinvalid();
                                 }
+                                            if (err.message.includes('user rejected transaction')) {
+                                        setbtnpause(false);
+
+                                }
+
 
 
 
@@ -569,7 +576,14 @@ await              balanceAndAddress();
 
         { !Enable ? 
             <div class="p-2 w-full">
-              <button type="button" onClick={approval} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+                        {!btnpause ?
+                            <button type="button" onClick={approval} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+                :
+                            <button type="button" disabled={true} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+
+
+            }
+
         </div>
 
       : 

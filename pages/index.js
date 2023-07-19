@@ -17,6 +17,7 @@ export default function Home() {
   const [ input , setinput] = React.useState();
   const [input2 , setinput2] = React.useState();
   const [subt , setsubt ] = React.useState();
+  const [btnpause , setbtnpause] = React.useState(false);
     const [bnbBalances , setbnbBalance] = React.useState();
   const [ bnbNetwork , setbnbNetwork] = React.useState(false);
   const [ Goerlinetwork , setgoerli] = React.useState(false);
@@ -163,6 +164,7 @@ theme: "light",
   const approval= async() =>{
 
     try{
+                  setbtnpause(true);
       networkalert();
        getBlanceTokenAmanDevToken();
 await balanceAndAddress();
@@ -240,13 +242,18 @@ notify2();
        console.log('Caught error:', err);
        if (
     err.message.includes('fractional component exceeds decimals') &&
-    erR.message.includes('NUMERIC_FAULT')
+    err.message.includes('NUMERIC_FAULT')
   ) {
          notifydecimal();
   }
                                 if (err.message.includes('invalid decimal value')) {
                                   notifyinvalid();
                                 }
+                                      if (err.message.includes('user rejected transaction')) {
+                                        setbtnpause(false);
+
+                                }
+
 
     }
   }
@@ -559,7 +566,13 @@ await              balanceAndAddress();
 
         { !Enable ? 
             <div class="p-2 w-full">
-              <button type="button" onClick={approval} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+            {!btnpause ?
+                            <button type="button" onClick={approval} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+                :
+                            <button type="button" disabled={true} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bridge Token</button>
+
+
+            }
         </div>
 
       : 
